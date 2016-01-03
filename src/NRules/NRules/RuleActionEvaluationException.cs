@@ -16,9 +16,10 @@ namespace NRules
             RuleName = ruleName;
         }
 
+#if DOTNET
         [SecuritySafeCritical]
         protected RuleActionEvaluationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+            : base(info, context, null)
         {
             RuleName = info.GetString("RuleName");
         }
@@ -33,6 +34,7 @@ namespace NRules
             base.GetObjectData(info, context);
             info.AddValue("RuleName", RuleName, typeof(String));
         }
+#endif
 
         /// <summary>
         /// Rule that caused exception.

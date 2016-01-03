@@ -16,23 +16,23 @@ namespace NRules
             RuleName = ruleName;
         }
 
-        [SecuritySafeCritical]
-        protected RuleCompilationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            RuleName = info.GetString("RuleName");
-        }
+        //[SecuritySafeCritical]
+        //protected RuleCompilationException(SerializationInfo info, StreamingContext context)
+        //    : base(info, context)
+        //{
+        //    RuleName = info.GetString("RuleName");
+        //}
 
-        [SecurityCritical]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
-            base.GetObjectData(info, context);
-            info.AddValue("RuleName", RuleName, typeof(String));
-        }
+        //[SecurityCritical]
+        //public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    if (info == null)
+        //    {
+        //        throw new ArgumentNullException("info");
+        //    }
+        //    base.GetObjectData(info, context);
+        //    info.AddValue("RuleName", RuleName, typeof(String));
+        //}
 
         /// <summary>
         /// Rule that caused exception.

@@ -15,10 +15,10 @@ namespace NRules
         {
         }
 
-        [SecuritySafeCritical]
-        protected RuleConditionEvaluationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        //[SecuritySafeCritical]
+        //protected RuleConditionEvaluationException(SerializationInfo info, StreamingContext context)
+        //    : base(info, context)
+        //{
+        //}
     }
 }

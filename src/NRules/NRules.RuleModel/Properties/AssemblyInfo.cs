@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 [assembly: AssemblyTitle("NRules.RuleModel")]
-[assembly: AssemblyDescription("Canonical rules model for NRules")]
-[assembly: ComVisible(false)]
+[assembly: AssemblyDescription("Canonical rules model for NRules ")]
+
 [assembly: CLSCompliant(true)]
-[assembly: AllowPartiallyTrustedCallers]
+//[assembly: AllowPartiallyTrustedCallers]
 
 [assembly: InternalsVisibleTo("NRules.Rule.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

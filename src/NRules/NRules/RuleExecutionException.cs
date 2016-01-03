@@ -15,10 +15,12 @@ namespace NRules
         {
         }
 
+#if DOTNET
         [SecuritySafeCritical]
         protected RuleExecutionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
+#endif
     }
 }

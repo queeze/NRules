@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NRules.Tests</RootNamespace>
     <AssemblyName>NRules.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
@@ -59,24 +62,24 @@
     <Compile Include="Utilities\ExpressionComparerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NRules.Fluent\NRules.Fluent.csproj">
-      <Project>{B68D0662-BB3B-4183-85F0-E00875A95BB4}</Project>
-      <Name>NRules.Fluent</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\NRules\NRules.csproj">
-      <Project>{D60C7588-09B6-47DA-9459-4C88363E3EAE}</Project>
-      <Name>NRules</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\NRules.RuleModel\NRules.RuleModel.csproj">
-      <Project>{898356F3-1B5A-4D70-A20A-544997E30AB7}</Project>
-      <Name>NRules.RuleModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NRules.Fluent\NRules.Fluent.csproj">
+      <Project>{b68d0662-bb3b-4183-85f0-e00875a95bb4}</Project>
+      <Name>NRules.Fluent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NRules.RuleModel\NRules.RuleModel.csproj">
+      <Project>{898356f3-1b5a-4d70-a20a-544997e30ab7}</Project>
+      <Name>NRules.RuleModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NRules\NRules.csproj">
+      <Project>{d60c7588-09b6-47da-9459-4c88363e3eae}</Project>
+      <Name>NRules</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

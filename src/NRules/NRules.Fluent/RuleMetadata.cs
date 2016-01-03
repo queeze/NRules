@@ -107,3 +107,23 @@ namespace NRules.Fluent
         }
     }
 }
+
+namespace System
+{
+    using Reflection;
+    using Collections.Generic;
+
+    public static class TypeExtensions
+    {
+        public static IEnumerable<Attribute> GetCustomAttributes(this Type type, bool inherit)
+        {
+#if DOTNET || SILVERLIGHT
+            return type.GetCustomAttributes(inherit);
+#elif NETFX_CORE
+            return type.GetTypeInfo().GetCustomAttributes(inherit);
+#else
+            return type.GetTypeInfo().GetCustomAttributes(inherit);
+#endif
+        }
+    }
+}

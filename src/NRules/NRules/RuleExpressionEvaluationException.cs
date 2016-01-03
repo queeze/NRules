@@ -15,7 +15,8 @@ namespace NRules
         {
             Expression = expression;
         }
-        
+
+#if DOTNET
         [SecuritySafeCritical]
         protected RuleExpressionEvaluationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -33,7 +34,7 @@ namespace NRules
             base.GetObjectData(info, context);
             info.AddValue("Expression", Expression, typeof(String));
         }
-
+#endif
         /// <summary>
         /// Expression that caused exception.
         /// </summary>

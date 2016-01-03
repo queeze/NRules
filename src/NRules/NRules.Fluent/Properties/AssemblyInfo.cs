@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 [assembly: AssemblyTitle("NRules.Fluent")]
-[assembly: AssemblyDescription("Internal DSL for NRules")]
-[assembly: ComVisible(false)]
+[assembly: AssemblyDescription("Internal DSL for NRules ")]
+
 [assembly: CLSCompliant(true)]
-[assembly: AllowPartiallyTrustedCallers]
+//[assembly: AllowPartiallyTrustedCallers]
 
 [assembly: InternalsVisibleTo("NRules.Tests")]

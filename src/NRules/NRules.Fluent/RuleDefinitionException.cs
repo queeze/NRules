@@ -16,23 +16,23 @@ namespace NRules.Fluent
             RuleType = ruleType;
         }
 
-        [SecuritySafeCritical]
-        protected RuleDefinitionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            RuleType = (Type)info.GetValue("RuleType", typeof(Type));
-        }
+        //[SecuritySafeCritical]
+        //protected RuleDefinitionException(SerializationInfo info, StreamingContext context)
+        //    : base(info, context)
+        //{
+        //    RuleType = (Type)info.GetValue("RuleType", typeof(Type));
+        //}
 
-        [SecurityCritical]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
-            base.GetObjectData(info, context);
-            info.AddValue("RuleType", RuleType, typeof(Type));
-        }
+        //[SecurityCritical]
+        //public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    if (info == null)
+        //    {
+        //        throw new ArgumentNullException("info");
+        //    }
+        //    base.GetObjectData(info, context);
+        //    info.AddValue("RuleType", RuleType, typeof(Type));
+        //}
 
         /// <summary>
         /// Rule .NET type that caused exception.
