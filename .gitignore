@@ -119,3 +119,4 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+/samples/RuleBuilder/packages

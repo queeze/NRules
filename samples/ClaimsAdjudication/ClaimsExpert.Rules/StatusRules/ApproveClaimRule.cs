@@ -18,9 +18,9 @@ namespace NRules.Samples.ClaimsExpert.Rules.StatusRules
                 .Do(ctx => Approve(claim));
         }
 
-        private static ClaimStatus Approve(Claim claim)
+        private static void Approve(Claim claim)
         {
-            return claim.Status = ClaimStatus.Approved;
+            claim.Status = ClaimStatus.Approved;
         }
     }
 }

@@ -18,9 +18,9 @@ namespace NRules.Samples.ClaimsExpert.Rules.StatusRules
                 .Do(ctx => Review(claim));
         }
 
-        private static ClaimStatus Review(Claim claim)
+        private static void Review(Claim claim)
         {
-            return claim.Status = ClaimStatus.Review;
+            claim.Status = ClaimStatus.Review;
         }
     }
 }

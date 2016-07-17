@@ -1,0 +1,68 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETPortable,Version=v4.5,Profile=Profile259": {
+      "shim/1.0.2.50909": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+netcore45+wpa81+wp8/Shim.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+netcore45+wpa81+wp8/Shim.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "shim/1.0.2.50909": {
+      "sha512": "ueWNo89811VQllhRtDRhJPCPockiHZJJpAG7fjrm2HyjMQUTRte/a2nf+Yl5wkDfNO627Two3k8nvJe14HXn3Q==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/MonoAndroid1/Shim.XML",
+        "lib/MonoAndroid1/Shim.dll",
+        "lib/MonoAndroid1/Shim.pdb",
+        "lib/MonoTouch1/Shim.XML",
+        "lib/MonoTouch1/Shim.dll",
+        "lib/MonoTouch1/Shim.pdb",
+        "lib/Xamarin.iOS10/Shim.XML",
+        "lib/Xamarin.iOS10/Shim.dll",
+        "lib/Xamarin.iOS10/Shim.pdb",
+        "lib/net45/Shim.XML",
+        "lib/net45/Shim.dll",
+        "lib/net45/Shim.pdb",
+        "lib/netcore45/Shim.XML",
+        "lib/netcore45/Shim.dll",
+        "lib/netcore45/Shim.pdb",
+        "lib/netcore45/Shim.pri",
+        "lib/netcore451/Shim.XML",
+        "lib/netcore451/Shim.dll",
+        "lib/netcore451/Shim.pdb",
+        "lib/netcore451/Shim.pri",
+        "lib/portable-net45+netcore45+wpa81+wp8/Shim.XML",
+        "lib/portable-net45+netcore45+wpa81+wp8/Shim.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8/Shim.pdb",
+        "lib/portable-net45+netcore45+wpa81/Shim.XML",
+        "lib/portable-net45+netcore45+wpa81/Shim.dll",
+        "lib/portable-net45+netcore45+wpa81/Shim.pdb",
+        "lib/portable-win81+wpa81/Shim.XML",
+        "lib/portable-win81+wpa81/Shim.dll",
+        "lib/portable-win81+wpa81/Shim.pdb",
+        "lib/portable-win81+wpa81/Shim.pri",
+        "lib/wp8/Shim.XML",
+        "lib/wp8/Shim.dll",
+        "lib/wp8/Shim.pdb",
+        "package/services/metadata/core-properties/7c578ce9c8d0428ca001260bfc533f5a.psmdcp",
+        "shim.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "shim >= 1.0.2.50909"
+    ],
+    ".NETPortable,Version=v4.5,Profile=Profile259": []
+  }
+}

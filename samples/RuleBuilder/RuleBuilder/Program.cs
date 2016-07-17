@@ -20,6 +20,7 @@
             session.Insert(new Order(customer2, 120.00m));
 
             session.Fire();
+
         }
     }
 }

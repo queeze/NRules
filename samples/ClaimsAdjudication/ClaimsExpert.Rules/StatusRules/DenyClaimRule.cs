@@ -19,9 +19,9 @@ namespace NRules.Samples.ClaimsExpert.Rules.StatusRules
                 .Do(ctx => ctx.Update(claim));
         }
 
-        private static ClaimStatus Deny(Claim claim)
+        private static void Deny(Claim claim)
         {
-            return claim.Status = ClaimStatus.Denied;
+            claim.Status = ClaimStatus.Denied;
         }
     }
 }
