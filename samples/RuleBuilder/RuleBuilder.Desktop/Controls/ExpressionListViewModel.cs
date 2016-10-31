@@ -16,6 +16,12 @@ namespace RuleBuilder.Desktop.Controls
         private CombinationOperators _combineOperator = CombinationOperators.And;
         private PropertyInfo _propertyInfo;
         private object _value2;
+        private string _valueName;
+
+        public ExpressionListViewModel(string valueName)
+        {
+            _valueName = valueName;
+        }
 
         public IEnumerable<PropertyInfo> AvailableProperties
         {
@@ -186,7 +192,7 @@ namespace RuleBuilder.Desktop.Controls
 
         public LambdaExpression MakeExpression(ParameterExpression paramExpr = null)
         {
-            if(paramExpr == null) paramExpr = Expression.Parameter(ObjectType, "left");
+            if(paramExpr == null) paramExpr = Expression.Parameter(ObjectType, _valueName);
             
             var callExpr = Expression.MakeMemberAccess(paramExpr, PropertyInfo);
             var valueExpr = Expression.Constant(Value, PropertyType);

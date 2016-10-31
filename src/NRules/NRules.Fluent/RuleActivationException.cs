@@ -7,7 +7,7 @@ namespace NRules.Fluent
     /// <summary>
     /// Represents errors that occur when instantiating rule classes.
     /// </summary>
-    [Serializable]
+    //[Serializable]
     public class RuleActivationException : Exception
     {
         internal RuleActivationException(string message, Type ruleType, Exception innerException)

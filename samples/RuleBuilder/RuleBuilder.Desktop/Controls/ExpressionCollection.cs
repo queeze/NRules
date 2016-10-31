@@ -8,6 +8,11 @@ namespace RuleBuilder.Desktop.Controls
     public class ExpressionCollection : ObservableCollection<ExpressionListViewModel>
     {
         private Type _type;
+        private string _valueName;
+        public ExpressionCollection(string valueName)
+        {
+            _valueName = valueName;
+        }
 
         public Type Type
         {
@@ -28,7 +33,7 @@ namespace RuleBuilder.Desktop.Controls
         {
             get
             {
-                var paramExp = Expression.Parameter(Type, "left");
+                var paramExp = Expression.Parameter(Type, _valueName);
 
                 if (Count == 0)
                 {

@@ -7,7 +7,7 @@ namespace NRules.Fluent
     /// <summary>
     /// Represents errors that occur while building rule definition using fluent DSL.
     /// </summary>
-    [Serializable]
+    //[Serializable]
     public class RuleDefinitionException : Exception
     {
         internal RuleDefinitionException(string message, Type ruleType, Exception innerException)
