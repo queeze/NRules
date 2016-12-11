@@ -7,8 +7,8 @@ namespace RuleBuilder.Desktop.Controls
 {
     public class ExpressionCollection : ObservableCollection<ExpressionListViewModel>
     {
+        private readonly string _valueName;
         private Type _type;
-        private string _valueName;
         public ExpressionCollection(string valueName)
         {
             _valueName = valueName;
@@ -41,11 +41,8 @@ namespace RuleBuilder.Desktop.Controls
                 }
 
                 LambdaExpression lambda1 = this.First().MakeExpression(paramExp);
-                var ret = lambda1.Body;
-                foreach (var c in this.Skip(1))
-                {
-                    ret = Expression.MakeBinary((ExpressionType)c.CombineOperator, ret, c.MakeExpression(paramExp).Body);
-                }
+                var ret = this.Skip(1)
+                    .Aggregate(lambda1.Body, (current, c) => Expression.MakeBinary((ExpressionType) c.CombineOperator, current, c.MakeExpression(paramExp).Body));
 
                 return Expression.Lambda(ret, paramExp);
             }

@@ -87,7 +87,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\DynamicLinqUserControl.xaml">
+    <Page Include="Controls\ExpressionList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -99,8 +99,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\CombinationOperators.cs" />
-    <Compile Include="Controls\ComparisonOperators.cs" />
     <Compile Include="Controls\ExpressionCollection.cs" />
     <Compile Include="Controls\Variant.cs" />
     <Compile Include="Controls\ViewModelBase.cs" />
@@ -108,17 +106,18 @@
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Controls\DoNotFilterOnAttribute.cs" />
-    <Compile Include="Controls\DynamicLinqUserControl.xaml.cs">
-      <DependentUpon>DynamicLinqUserControl.xaml</DependentUpon>
+    <Compile Include="Controls\ExpressionList.xaml.cs">
+      <DependentUpon>ExpressionList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExpressionListViewModel.cs" />
+    <Compile Include="ViewModels\ContextObjectViewModel.cs" />
+    <Compile Include="ViewModels\ExpressionListViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -158,6 +157,14 @@
     <ProjectReference Include="..\..\..\src\NRules\NRules\NRules.csproj">
       <Project>{d60c7588-09b6-47da-9459-4c88363e3eae}</Project>
       <Name>NRules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RuleBuilder.Core\RuleBuilder.Core.csproj">
+      <Project>{ED206095-51BF-4AE0-90DA-4B5F4D3355BB}</Project>
+      <Name>RuleBuilder.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RuleBuilder.Presentation\RuleBuilder.Presentation.csproj">
+      <Project>{7B0010CF-95B0-407F-A2AC-54BBACA10154}</Project>
+      <Name>RuleBuilder.Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace RuleBuilder.Desktop.Controls
+namespace RuleBuilder.Core.Model
 {
     public enum CombinationOperators
     {
@@ -8,5 +8,4 @@ namespace RuleBuilder.Desktop.Controls
         And = ExpressionType.And,
         Xor = ExpressionType.ExclusiveOr,
     }
-
 }

@@ -15,14 +15,18 @@ namespace RuleBuilder.Desktop
 
         public MainWindowViewModel()
         {
-            ExpressionList1 = new ExpressionCollection("customer") { Type = typeof(Customer) };
-            ExpressionList1.Add(new ExpressionListViewModel("customer"));
+            Expressions = new ExpressionCollection("customer") { Type = typeof(Customer) };
+            Expressions.Add(new ExpressionListViewModel("customer"));
             RunTestCommand = new DelegateCommand(OnRunTest);
+
+            NewExpressionCommand = new DelegateCommand(OnNewExpression);
         }
 
-        public ExpressionCollection ExpressionList1 { get; set; }
+        public ExpressionCollection Expressions { get; set; }
 
-        public DelegateCommand RunTestCommand { get; } 
+        public DelegateCommand NewExpressionCommand { get; }
+
+        public DelegateCommand RunTestCommand { get; }
 
         private void OnRunTest()
         {
@@ -35,13 +39,18 @@ namespace RuleBuilder.Desktop
                 .RightHandSide();
             Expression<Action<IContext>> action = context => Console.WriteLine(@"Test");
             rhsCustomerPattern.Action(action);
-            lhsCustomerPattern.Condition(ExpressionList1.CompleteExpression);
+            lhsCustomerPattern.Condition(Expressions.CompleteExpression);
             IRuleDefinition rule = builder.Build();
             RuleCompiler compiler = new RuleCompiler();
             ISessionFactory sessionFactory = compiler.Compile(new[] { rule });
             ISession session = sessionFactory.CreateSession();
             session.Insert(new Customer("Test"));
             session.Fire();
+        }
+
+        private void OnNewExpression()
+        {
+            Expressions.Add(new ExpressionListViewModel("customer"));
         }
     }
 }

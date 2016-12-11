@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{ED206095-51BF-4AE0-90DA-4B5F4D3355BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RuleBuilder.Core</RootNamespace>
+    <AssemblyName>RuleBuilder.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Model\CombinationOperators.cs" />
+    <Compile Include="Model\CommandBase.cs" />
+    <Compile Include="Model\Commands\Policies\AddDataContextToPolicyCommand.cs" />
+    <Compile Include="Model\Commands\Policies\AddFactToPolicyCommand.cs" />
+    <Compile Include="Model\Commands\Policies\AddPolicyToPolicyCommand.cs" />
+    <Compile Include="Model\Commands\Policies\AddRuleToPolicyCommand.cs" />
+    <Compile Include="Model\Commands\Policies\RemovePolicyToPolicyCommand.cs" />
+    <Compile Include="Model\ComparisonOperators.cs" />
+    <Compile Include="Model\Condition.cs" />
+    <Compile Include="Model\ConditionDecimalValue.cs" />
+    <Compile Include="Model\ConditionDoubleValue.cs" />
+    <Compile Include="Model\ConditionIntegerValue.cs" />
+    <Compile Include="Model\ConditionLongValue.cs" />
+    <Compile Include="Model\ConditionStringValue.cs" />
+    <Compile Include="Model\ConditionValue.cs" />
+    <Compile Include="Model\Commands\Policies\CreatePolicyCommand.cs" />
+    <Compile Include="Model\DataContext.cs" />
+    <Compile Include="Model\Fact.cs" />
+    <Compile Include="Model\LeftHandSide.cs" />
+    <Compile Include="Model\Policy.cs" />
+    <Compile Include="Model\Commands\Policies\PolicyCommandType.cs" />
+    <Compile Include="Model\ReadOnlyHashSet.cs" />
+    <Compile Include="Model\RightHandSide.cs" />
+    <Compile Include="Model\Rule.cs" />
+    <Compile Include="Model\Commands\Policies\UpdatePolicyDescriptionCommand.cs" />
+    <Compile Include="Model\Commands\Policies\UpdatePolicyNameCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\ContextClass.cs" />
+    <Compile Include="Services\ContextTypeReflection.cs" />
+    <Compile Include="Services\DataContextService.cs" />
+    <Compile Include="Services\IDataContextService.cs" />
+    <Compile Include="Storage\InMemoryPoliciesRepository.cs" />
+    <Compile Include="Storage\IPoliciesRepository.cs" />
+    <Compile Include="Storage\IRepository.cs" />
+    <Compile Include="Services\PoliciesService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\NRules\NRules.Fluent\NRules.Fluent.csproj">
+      <Project>{b68d0662-bb3b-4183-85f0-e00875a95bb4}</Project>
+      <Name>NRules.Fluent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\NRules\NRules.RuleModel\NRules.RuleModel.csproj">
+      <Project>{898356f3-1b5a-4d70-a20a-544997e30ab7}</Project>
+      <Name>NRules.RuleModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\NRules\NRules\NRules.csproj">
+      <Project>{d60c7588-09b6-47da-9459-4c88363e3eae}</Project>
+      <Name>NRules</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

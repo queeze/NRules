@@ -37,6 +37,7 @@ namespace NRules.Samples.RuleBuilder
             // Create rule builder
             var builder = new NRules.RuleModel.Builders.RuleBuilder();
             builder.Name("TestRule");
+            
 
             // Build conditions
             PatternBuilder customerPattern = builder.LeftHandSide().Pattern(typeof (Customer), "customer");
@@ -61,6 +62,8 @@ namespace NRules.Samples.RuleBuilder
 
 
             PatternBuilder orderPattern = builder.LeftHandSide().Pattern(typeof (Order), "order");
+
+            
 
             // Can specify expression at compile time
             //Expression<Func<Order, Customer, bool>> orderCondition1 = 
@@ -88,8 +91,6 @@ namespace NRules.Samples.RuleBuilder
 
 
             builder.RightHandSide().Action(action);
-
-
 
             //Build rule model
             return builder.Build();

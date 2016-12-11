@@ -5,18 +5,21 @@ using System.Reflection;
 using System.Linq.Expressions;
 using System.Windows.Data;
 using System.Windows.Controls;
+using Prism.Mvvm;
+using Expression = System.Linq.Expressions.Expression;
+using RuleBuilder.Core.Model;
 
 namespace RuleBuilder.Desktop.Controls
 {
-    public class ExpressionListViewModel : ViewModelBase 
+    public class ExpressionListViewModel : BindableBase 
     {
+        private readonly string _valueName;
         private IEnumerable<PropertyInfo> _availableProperties;
         private Type _objectType;
         private ComparisonOperators _compareOperator = ComparisonOperators.Equal;
         private CombinationOperators _combineOperator = CombinationOperators.And;
         private PropertyInfo _propertyInfo;
         private object _value2;
-        private string _valueName;
 
         public ExpressionListViewModel(string valueName)
         {
@@ -26,44 +29,29 @@ namespace RuleBuilder.Desktop.Controls
         public IEnumerable<PropertyInfo> AvailableProperties
         {
             get { return _availableProperties; }
-            set
-            {
-                _availableProperties = value;
-                OnPropertyChanged(nameof(AvailableProperties));
-            }
+            set { SetProperty(ref _availableProperties, value); }
         }
 
         public Array AvailableCompareOperators
         {
             get 
             {
-                if (PropertyType == typeof(string))
-                {
-                    return new ComparisonOperators[] { ComparisonOperators.Equal, ComparisonOperators.NotEqual, ComparisonOperators.Contains };
-                }
-                else
-                {
-                    var operators = from o in Enum.GetValues(typeof(ComparisonOperators)).Cast<ComparisonOperators>()
-                                    where o != ComparisonOperators.Contains // exclude "Contains" as only works for String
-                                    select o;
-                    return operators.ToArray();
-                }
+                var operators = from o in Enum.GetValues(typeof(ComparisonOperators)).Cast<ComparisonOperators>()
+                                select o;
+                return PropertyType == typeof(string)? 
+                    operators.Where(x => x != ComparisonOperators.Contains).ToArray() 
+                    : operators.ToArray();
             }
         }
 
-        public Array AvailableCombinationOperators
-        {
-            get { return Enum.GetValues(typeof(CombinationOperators)); }
-        }
+        public Array AvailableCombinationOperators => Enum.GetValues(typeof(CombinationOperators));
 
-	    public Type ObjectType
+        public Type ObjectType
 	    {
 		    get { return _objectType;}
 
             set
             { 
-                _objectType = value;
-
                 if (value == null)
                 {
                     AvailableProperties = null;
@@ -72,34 +60,25 @@ namespace RuleBuilder.Desktop.Controls
                 {
                     AvailableProperties = from p in value.GetProperties()
                                           where GetSupportedTypes().Contains(p.PropertyType) &&
-                                          p.GetCustomAttributes(typeof(DoNotFilterOnAttribute), true).Length == 0 // in other words, where attribute is NOT applied
+                                          // in other words, where attribute is NOT applied
+                                          p.GetCustomAttributes(typeof(DoNotFilterOnAttribute), true).Length == 0 
                                           select p;
                 }
 
-                OnPropertyChanged(nameof(ObjectType));
+                SetProperty(ref _objectType, value);
             }
 	    }
 	
         public ComparisonOperators CompareOperator
         {
             get { return _compareOperator; }
-
-            set
-            {
-                _compareOperator = value;
-                OnPropertyChanged(nameof(CompareOperator));
-            }
+            set { SetProperty(ref _compareOperator, value); }
         }
 
         public CombinationOperators CombineOperator
         {
             get { return _combineOperator; }
-
-            set
-            {
-                _combineOperator = value;
-                OnPropertyChanged(nameof(CombineOperator));
-            }
+            set { SetProperty(ref _combineOperator, value); }
         }
 
         public PropertyInfo PropertyInfo
@@ -118,28 +97,16 @@ namespace RuleBuilder.Desktop.Controls
             }
         }
 
- 	    public Type PropertyType
-	    {
-            get
-            {
-                return PropertyInfo == null? typeof(string) : PropertyInfo.PropertyType;
-            }
-	    }
+ 	    public Type PropertyType => PropertyInfo?.PropertyType ?? typeof(string);
 
-        public string PropertyName
-        {
-            get
-            {
-                return PropertyInfo == null ? null : PropertyInfo.Name;
-            }
-        }
+        public string PropertyName => PropertyInfo?.Name;
 
         public dynamic Value
         {
             get { return Value2.Value; }
             set
             {
-                if (!Object.Equals(Value2.Value, value))
+                if (!object.Equals(Value2.Value, value))
                 {
                     Value2.Value = value;
                     OnPropertyChanged(nameof(Value));
@@ -151,7 +118,7 @@ namespace RuleBuilder.Desktop.Controls
         {
             get
             {
-                Type specificType = typeof(Variant<>).MakeGenericType(new Type[] { PropertyType });
+                Type specificType = typeof(Variant<>).MakeGenericType(PropertyType);
 
                 if (_value2 == null || _value2.GetType() != specificType)
                 {
@@ -166,8 +133,7 @@ namespace RuleBuilder.Desktop.Controls
         {
             get
             {
-                Binding binding = new Binding("Value2.Value");
-                binding.Source = this;
+                Binding binding = new Binding("Value2.Value") {Source = this};
 
                 if (PropertyType == typeof(DateTime) || PropertyType == typeof(DateTime?))
                 {
@@ -175,18 +141,16 @@ namespace RuleBuilder.Desktop.Controls
                     dp.SetBinding(DatePicker.SelectedDateProperty, binding);
                     return dp;
                 }
-                else
-                {
-                    TextBox tb = new TextBox();
-                    tb.SetBinding(TextBox.TextProperty, binding);
-                    return tb;
-                }
+
+                TextBox tb = new TextBox();
+                tb.SetBinding(TextBox.TextProperty, binding);
+                return tb;
             }
         }
 
         public static object CreateGeneric(Type generic, Type innerType, params object[] args)
         {
-            Type specificType = generic.MakeGenericType(new Type[] { innerType });
+            Type specificType = generic.MakeGenericType(innerType);
             return Activator.CreateInstance(specificType, args);
         }
 
@@ -212,7 +176,7 @@ namespace RuleBuilder.Desktop.Controls
 
         public static IEnumerable<Type> GetSupportedTypes()
         {
-            return new Type[] {
+            return new[] {
                 typeof(DateTime), typeof(DateTime?),
                 typeof(long), typeof(long?),
                 typeof(short), typeof(short?),

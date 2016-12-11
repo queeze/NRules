@@ -1,10 +1,9 @@
 {
   "locked": false,
-  "version": 2,
+  "version": 1,
   "targets": {
     ".NETPortable,Version=v4.5,Profile=Profile259": {
       "shim/1.0.2.50909": {
-        "type": "package",
         "compile": {
           "lib/portable-net45+netcore45+wpa81+wp8/Shim.dll": {}
         },

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace RuleBuilder.Desktop.Controls
+namespace RuleBuilder.Core.Model
 {
     public enum ComparisonOperators
     {
@@ -12,5 +12,4 @@ namespace RuleBuilder.Desktop.Controls
         GreaterThanOrEqual = ExpressionType.GreaterThanOrEqual,
         Contains
     }
-
 }

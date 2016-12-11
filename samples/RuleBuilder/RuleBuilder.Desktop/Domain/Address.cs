@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RuleBuilder.Desktop.Domain
+﻿namespace RuleBuilder.Desktop.Domain
 {
     public class Address
     {
