@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using RuleBuilder.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Linq.Expressions;
-using System.Windows.Data;
+using System.Reflection;
 using System.Windows.Controls;
-using Prism.Mvvm;
+using System.Windows.Data;
 using Expression = System.Linq.Expressions.Expression;
-using RuleBuilder.Core.Model;
 
 namespace RuleBuilder.Desktop.Controls
 {
-    public class ExpressionListViewModel : BindableBase 
+    public class ExpressionListViewModel : BindableBase
     {
         private readonly string _valueName;
         private IEnumerable<PropertyInfo> _availableProperties;
@@ -34,12 +34,12 @@ namespace RuleBuilder.Desktop.Controls
 
         public Array AvailableCompareOperators
         {
-            get 
+            get
             {
                 var operators = from o in Enum.GetValues(typeof(ComparisonOperators)).Cast<ComparisonOperators>()
                                 select o;
-                return PropertyType == typeof(string)? 
-                    operators.Where(x => x != ComparisonOperators.Contains).ToArray() 
+                return PropertyType == typeof(string) ?
+                    operators.Where(x => x != ComparisonOperators.Contains).ToArray()
                     : operators.ToArray();
             }
         }
@@ -47,11 +47,11 @@ namespace RuleBuilder.Desktop.Controls
         public Array AvailableCombinationOperators => Enum.GetValues(typeof(CombinationOperators));
 
         public Type ObjectType
-	    {
-		    get { return _objectType;}
+        {
+            get { return _objectType; }
 
             set
-            { 
+            {
                 if (value == null)
                 {
                     AvailableProperties = null;
@@ -61,14 +61,14 @@ namespace RuleBuilder.Desktop.Controls
                     AvailableProperties = from p in value.GetProperties()
                                           where GetSupportedTypes().Contains(p.PropertyType) &&
                                           // in other words, where attribute is NOT applied
-                                          p.GetCustomAttributes(typeof(DoNotFilterOnAttribute), true).Length == 0 
+                                          p.GetCustomAttributes(typeof(DoNotFilterOnAttribute), true).Length == 0
                                           select p;
                 }
 
                 SetProperty(ref _objectType, value);
             }
-	    }
-	
+        }
+
         public ComparisonOperators CompareOperator
         {
             get { return _compareOperator; }
@@ -88,16 +88,16 @@ namespace RuleBuilder.Desktop.Controls
             set
             {
                 _propertyInfo = value;
-                OnPropertyChanged(nameof(PropertyInfo));
-                OnPropertyChanged(nameof(PropertyType));
-                OnPropertyChanged(nameof(PropertyName));
-                OnPropertyChanged(nameof(AvailableCompareOperators));
-                OnPropertyChanged(nameof(Value2));
-                OnPropertyChanged(nameof(ValueControl));
+                RaisePropertyChanged(nameof(PropertyInfo));
+                RaisePropertyChanged(nameof(PropertyType));
+                RaisePropertyChanged(nameof(PropertyName));
+                RaisePropertyChanged(nameof(AvailableCompareOperators));
+                RaisePropertyChanged(nameof(Value2));
+                RaisePropertyChanged(nameof(ValueControl));
             }
         }
 
- 	    public Type PropertyType => PropertyInfo?.PropertyType ?? typeof(string);
+        public Type PropertyType => PropertyInfo?.PropertyType ?? typeof(string);
 
         public string PropertyName => PropertyInfo?.Name;
 
@@ -109,7 +109,7 @@ namespace RuleBuilder.Desktop.Controls
                 if (!object.Equals(Value2.Value, value))
                 {
                     Value2.Value = value;
-                    OnPropertyChanged(nameof(Value));
+                    RaisePropertyChanged(nameof(Value));
                 }
             }
         }
@@ -129,11 +129,11 @@ namespace RuleBuilder.Desktop.Controls
             }
         }
 
-        public Control ValueControl 
+        public Control ValueControl
         {
             get
             {
-                Binding binding = new Binding("Value2.Value") {Source = this};
+                Binding binding = new Binding("Value2.Value") { Source = this };
 
                 if (PropertyType == typeof(DateTime) || PropertyType == typeof(DateTime?))
                 {
@@ -156,8 +156,8 @@ namespace RuleBuilder.Desktop.Controls
 
         public LambdaExpression MakeExpression(ParameterExpression paramExpr = null)
         {
-            if(paramExpr == null) paramExpr = Expression.Parameter(ObjectType, _valueName);
-            
+            if (paramExpr == null) paramExpr = Expression.Parameter(ObjectType, _valueName);
+
             var callExpr = Expression.MakeMemberAccess(paramExpr, PropertyInfo);
             var valueExpr = Expression.Constant(Value, PropertyType);
             Expression expr;
@@ -170,24 +170,24 @@ namespace RuleBuilder.Desktop.Controls
             {
                 expr = Expression.MakeBinary((ExpressionType)CompareOperator, callExpr, valueExpr);
             }
-            
-            return Expression.Lambda( expr, paramExpr);
+
+            return Expression.Lambda(expr, paramExpr);
         }
 
         public static IEnumerable<Type> GetSupportedTypes()
         {
             return new[] {
-                typeof(DateTime), typeof(DateTime?),
-                typeof(long), typeof(long?),
-                typeof(short), typeof(short?),
-                typeof(ulong), typeof(ulong?),
-                typeof(ushort), typeof(ushort?),
-                typeof(float), typeof(float?),
-                typeof(double), typeof(double?),
-                typeof(decimal), typeof(decimal?),
-                typeof(bool), typeof(bool?),
-                typeof(int), typeof(int?),
-                typeof(uint), typeof(uint),
+                typeof(DateTime),   typeof(DateTime?),
+                typeof(long),       typeof(long?),
+                typeof(short),      typeof(short?),
+                typeof(ulong),      typeof(ulong?),
+                typeof(ushort),     typeof(ushort?),
+                typeof(float),      typeof(float?),
+                typeof(double),     typeof(double?),
+                typeof(decimal),    typeof(decimal?),
+                typeof(bool),       typeof(bool?),
+                typeof(int),        typeof(int?),
+                typeof(uint),       typeof(uint),
                 typeof(string)
             };
         }

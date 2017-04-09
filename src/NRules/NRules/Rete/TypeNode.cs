@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace NRules.Rete
 {
@@ -15,7 +16,7 @@ namespace NRules.Rete
 
         public override bool IsSatisfiedBy(IExecutionContext context, Fact fact)
         {
-            bool isMatchingType = FilterType.IsAssignableFrom(fact.FactType);
+            bool isMatchingType = FilterType.GetTypeInfo().IsAssignableFrom(fact.FactType.GetTypeInfo());
             return isMatchingType;
         }
 

@@ -1,7 +1,7 @@
 ﻿{
   "supports": {},
   "dependencies": {
-    "shim": "1.0.2.50909"
+    "shim": "2.0.1"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile259": {}
