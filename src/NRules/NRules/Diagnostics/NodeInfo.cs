@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using NRules.Rete;
@@ -28,7 +27,9 @@ namespace NRules.Diagnostics
     /// <summary>
     /// Node in the rete network graph.
     /// </summary>
-    [Serializable]
+#if NET45
+    [System.Serializable]
+#endif
     public class NodeInfo
     {
         private static readonly string[] Empty = {};
@@ -82,7 +83,7 @@ namespace NRules.Diagnostics
         internal static NodeInfo Create(BetaMemoryNode node, IBetaMemory memory)
         {
             var tuples = memory.Tuples.Select(
-                t => string.Join(" || ", t.Facts.Reverse().Select(f => f.Object).ToArray()));
+                t => string.Join(" || ", t.OrderedFacts.Select(f => f.Object).ToArray()));
             return new NodeInfo(NodeType.BetaMemory, string.Empty, Empty, Empty, tuples);
         }
 
@@ -93,7 +94,7 @@ namespace NRules.Diagnostics
 
         internal static NodeInfo Create(RuleNode node)
         {
-            return new NodeInfo(NodeType.Rule, node.Rule.Definition.Name);
+            return new NodeInfo(NodeType.Rule, node.CompiledRule.Definition.Name);
         }
 
         internal NodeInfo(NodeType nodeType, string details)

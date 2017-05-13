@@ -34,6 +34,11 @@ namespace NRules.RuleModel
         string Description { get; }
 
         /// <summary>
+        /// Rule priority.
+        /// </summary>
+        int Priority { get; }
+
+        /// <summary>
         /// Rule repeatability.
         /// </summary>
         RuleRepeatability Repeatability { get; }
@@ -44,11 +49,11 @@ namespace NRules.RuleModel
         IEnumerable<string> Tags { get; }
 
         /// <summary>
-        /// Rule priority.
+        /// Properties attached to the rule.
         /// </summary>
-        PriorityElement Priority { get; }
+        PropertyMap Properties { get; }
 
-        /// <summary>
+            /// <summary>
         /// Rule's dependencies.
         /// </summary>
         DependencyGroupElement DependencyGroup { get; }
@@ -66,10 +71,11 @@ namespace NRules.RuleModel
 
     internal class RuleDefinition : IRuleDefinition
     {
-        private readonly List<string> _tags;
         private readonly string _name;
         private readonly string _description;
-        private readonly PriorityElement _priority;
+        private readonly int _priority;
+        private readonly List<string> _tags;
+        private readonly PropertyMap _properties;
         private readonly RuleRepeatability _repeatability;
         private readonly DependencyGroupElement _dependencies;
         private readonly GroupElement _leftHandSide;
@@ -85,15 +91,17 @@ namespace NRules.RuleModel
             get { return RuleRepeatability.Repeatable; }
         }
 
-        public RuleDefinition(string name, string description, RuleRepeatability repeatability, IEnumerable<string> tags,
-            PriorityElement priority, DependencyGroupElement dependencies, GroupElement leftHandSide, ActionGroupElement rightHandSide)
+        public RuleDefinition(string name, string description, int priority, 
+            RuleRepeatability repeatability, IEnumerable<string> tags, IEnumerable<RuleProperty> properties,
+            DependencyGroupElement dependencies, GroupElement leftHandSide, ActionGroupElement rightHandSide)
         {
             _name = name;
             _description = description;
             _repeatability = repeatability;
-            _tags = new List<string>(tags);
-
             _priority = priority;
+            _tags = new List<string>(tags);
+            _properties = new PropertyMap(properties);
+
             _dependencies = dependencies;
             _leftHandSide = leftHandSide;
             _rightHandSide = rightHandSide;
@@ -102,6 +110,11 @@ namespace NRules.RuleModel
         public string Name
         {
             get { return _name; }
+        }
+
+        public int Priority
+        {
+            get { return _priority; }
         }
 
         public string Description
@@ -119,9 +132,9 @@ namespace NRules.RuleModel
             get { return _tags; }
         }
 
-        public PriorityElement Priority
+        public PropertyMap Properties
         {
-            get { return _priority; }
+            get { return _properties; }
         }
 
         public DependencyGroupElement DependencyGroup
